@@ -39,8 +39,8 @@
                 />
                 <!-- svelte-ignore a11y-label-has-associated-control -->
                 <label class="label">
-                    <a href="/" class="label-text-alt link link-hover"
-                        >Olvidaste tu contraseña?</a
+                    <a href="/register" class="label-text-alt link link-hover"
+                        >No tengo una cuenta</a
                     >
                 </label>
             </div>

@@ -1,6 +1,6 @@
 import type { LayoutServerLoad } from './$types'
 
-// get `locals.user` and pass it to the `page` store
+// obtenemos los datos del usuario de los locales gracias al hook de sesión
 export const load: LayoutServerLoad = async ({ locals }) => {
     return {
         user: locals.user,

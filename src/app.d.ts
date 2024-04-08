@@ -3,10 +3,8 @@ declare namespace App {
 		user: {
 			name: string
 			role: string
+			id: string
+			twoFactorEnabled: boolean
 		}
 	}
-
-	// interface PageData {}
-
-	// interface Platform {}
 }

@@ -8,10 +8,12 @@ datasource db {
 }
 
 model User {
-  id            String @id @default(uuid())
-  username      String @unique
-  passwordHash  String
-  userAuthToken String @unique
+  id               String  @id @default(uuid())
+  username         String  @unique
+  passwordHash     String
+  userAuthToken    String? @unique
+  twoFactorSecret  String?
+  twoFactorEnabled Boolean
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

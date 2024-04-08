@@ -1,18 +1,16 @@
 import { fail, redirect } from '@sveltejs/kit'
 import type { Action, Actions, PageServerLoad } from './$types'
 import bcrypt from 'bcrypt'
+import speakeasy from 'speakeasy'
 
 import { db } from '$lib/database'
 
-// using an enum for user roles to avoid typos
-// if you're not using TypeScript use an object
 enum Roles {
-    ADMIN = 'ADMIN',
-    USER = 'USER',
+    Administrador = 'Administrador',
+    General = 'General',
 }
 
 export const load: PageServerLoad = async ({ locals }) => {
-    // redirect user if logged in
     if (locals.user) {
         redirect(302, '/')
     }
@@ -41,16 +39,20 @@ const register: Action = async ({ request }: { request: Request }) => {
         return fail(400, { user: true })
     }
 
-    await db.user.create({
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const twoFactorSecret = speakeasy.generateSecret().base32;
+
+    const newUser = await db.user.create({
         data: {
             username,
-            passwordHash: await bcrypt.hash(password, 10),
-            userAuthToken: crypto.randomUUID(),
-            role: { connect: { name: Roles.USER } },
+            passwordHash: hashedPassword,
+            twoFactorSecret,
+            twoFactorEnabled: false,
+            role: { connect: { name: Roles.General } },
         },
-    })
+    });
 
-    redirect(303, '/login')
+    throw redirect(303, `/setup-2fa?user=${newUser.id}`);
 }
 
 export const actions: Actions = { register }

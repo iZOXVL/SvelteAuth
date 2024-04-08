@@ -21,8 +21,16 @@
                             <details>
                                 <summary>Iniciar sesión / Registrarse</summary>
                                 <ul class="p-2 bg-base-100 rounded-t-none">
-                                    <li><a href="/login">Iniciar sesión</a></li>
-                                    <li><a href="/register">Registrarse</a></li>
+                                    <li
+                                        class="rounded-md text-center btn-outline btn-secondary"
+                                    >
+                                        <a href="/login">Iniciar sesión</a>
+                                    </li>
+                                    <li
+                                        class="rounded-md text-center btn-outline btn-primary"
+                                    >
+                                        <a href="/register">Registrarse</a>
+                                    </li>
                                 </ul>
                             </details>
                         </li>
@@ -35,7 +43,9 @@
                             <details>
                                 <summary> Configuración </summary>
                                 <ul class="p-2 bg-base-100 rounded-t-none">
-                                    <li>
+                                    <li
+                                        class="rounded-md text-center btn-outline btn-error W[100vh]"
+                                    >
                                         <form
                                             action="/logout"
                                             method="POST"
